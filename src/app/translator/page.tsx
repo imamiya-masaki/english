@@ -1,9 +1,11 @@
+"use client"
+
 import { css } from '../../../styled-system/css';
  
 
 type SystemStyleObject = Parameters<typeof css>[0];
 
-export default function Home() {
+export default function Translator() {
 
   const topCss: SystemStyleObject = {
     display: "flex",
@@ -24,18 +26,28 @@ export default function Home() {
     "backgroundColor": "#eeeeee",
   }
 
+
+
   return (
-    <div className={css(topCss)}>
-      <div className={css(boxCss)} id="left">
-        <textarea className={css(textareaCss)}>
-          
-        </textarea>
+    <div>
+
+      <div className={css(topCss)}>
+        <div className={css(boxCss)} id="left">
+          <textarea className={css(textareaCss)}>
+            
+          </textarea>
+        </div>
+        <div className={css(boxCss)} id="right">
+          <textarea className={css(textareaCss)}>
+            
+          </textarea>
+        </div>
       </div>
-      <div className={css(boxCss)} id="right">
-        <textarea className={css(textareaCss)}>
-          
-        </textarea>
+
+      <div >
+        <button ></button>
       </div>
+     
     </div>
   )
 }
