@@ -1,15 +1,7 @@
+import { isTranslateRequestJson, responseJson } from './../../../type';
 import { NextResponse } from "next/server";
 
 require('dotenv').config();
-
-type translateRequestJson = {
-  text: string
-}
-
-type responseJson = {
-  trasnlated: string,
-  error?: string
-}
 
 type DeepLTargetLang = "EN" | "JA"
 
@@ -23,11 +15,6 @@ type DeepLResponseData = {
     detected_source_language: DeepLTargetLang,
     text: string
   }[]
-}
-
-function isTranslateRequestJson (value: any): value is translateRequestJson {
-  console.log('isTranslateRequestJson')
-  return typeof value?.text === "string"
 }
 
 export async function POST(request: Request) {

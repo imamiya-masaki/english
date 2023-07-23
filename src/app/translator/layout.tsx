@@ -12,12 +12,14 @@ export default function TranslatorLayout({
 }: {
   children: React.ReactNode
 }) {
-  console.log('dotenv', process.env.DEEPL_API_KEY)
   return (
     <div className={css(translatorCss)}>
 
-      <div id="header">
-        hogehoge
+      <div id="header" className={css
+      ({
+        "textAlign": "center"
+      })}>
+        translator
       </div>
 
       <div id="main">
