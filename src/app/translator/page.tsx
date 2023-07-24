@@ -13,15 +13,26 @@ const NeumorphismCss: SystemStyleObject = {
 
 const TopMargin = 20;
 
+const BLACK_COLOR = "#7b7878"
+const BACKGROUND_COLOR = "#f8f8f8"
+
+const topBorderCss: SystemStyleObject = {
+  border: `1px solid ${BLACK_COLOR}`,
+  borderRadius: "10px"
+}
+
 const topCss: SystemStyleObject = {
-  display: "flex",
+  display: "block",
   justifyContent: "center",
   // width: "99%",
   columnGap: "1%",
-  marginLeft: "auto",
-  marginRight: "auto",
-  marginTop: `${TopMargin}px`,
-  marginBottom: `${TopMargin}px`
+  // marginLeft: "auto",
+  // marginRight: "auto",
+  marginLeft: `${TopMargin}px`,
+  marginRight: `${TopMargin}px`,
+  padding: "10px",
+  backgroundColor: `${BACKGROUND_COLOR}`,
+  ...topBorderCss
 }
 
 const boxCss: SystemStyleObject = {
@@ -32,7 +43,9 @@ const boxCss: SystemStyleObject = {
 const textareaCss: SystemStyleObject = {
   "width": "100%",
   "height": "100%",
-  "backgroundColor": "#eeeeee",
+  justifyContent: "center",
+  border: `1px solid ${BLACK_COLOR}`,
+  backgroundColor: "#FFFFFF",
 }
 
 const buttonCss: SystemStyleObject = {
@@ -91,16 +104,17 @@ export default function Translator() {
           en:
           <textarea className={css(textareaCss)} value={translateENText} onChange={(e) => {
             setTranslateENText(e.target.value)
-          }}/>
+          }} rows={10}/>
         </label>
+
+        <div id="button" >
+          <button onClick={translateHandler} className={css(buttonCss)}>Translate</button>
+        </div>
+
         <label className={css(boxCss)} id="right">
           ja:
-          <textarea className={css(textareaCss)} value={translatedJAText} readOnly />  
+          <textarea className={css(textareaCss)} value={translatedJAText} rows={10} readOnly />  
         </label>
-      </div>
-
-      <div id="button" >
-        <button onClick={translateHandler} className={css(buttonCss)}>Translate</button>
       </div>
       
     </div>
