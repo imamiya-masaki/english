@@ -29,7 +29,7 @@ DROP TABLE page;
 DROP TABLE book;
 CREATE TABLE public.book
 (
-    id UUID NOT NULL DEFAULT gen_random_uuid(),
+    id serial,
     book_name varchar(255),
     PRIMARY KEY (id),
     created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -38,7 +38,7 @@ CREATE TABLE public.book
 
 CREATE TABLE public.page
 (
-    book_id uuid NOT NULL,
+    book_id integer,
     page_number integer,
     created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (book_id, page_number),
@@ -47,10 +47,10 @@ CREATE TABLE public.page
 
 CREATE TABLE public.sentense
 (
-    id uuid NOT NULL DEFAULT gen_random_uuid(),
+    id serial,
     text_en text,
     text_ja text,
-    book_id uuid,
+    book_id integer,
     page_number integer,
     created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
@@ -59,11 +59,11 @@ CREATE TABLE public.sentense
 
 CREATE TABLE public.word
 (
-    id uuid NOT NULL DEFAULT gen_random_uuid(),
+    id serial,
     word_en varchar(255),
     word_ja varchar(255),
     "description" text,
-    book_id uuid,
+    book_id integer,
     page_number integer,
     created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
