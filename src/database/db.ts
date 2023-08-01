@@ -1,6 +1,6 @@
-import postgres from "postgres";
+import { Client } from "pg"
 
 const databaseURL = process.env.DATABASE_URL!
 
-export const sql = postgres(databaseURL)
+export const client = new Client({connectionString: databaseURL})
 
