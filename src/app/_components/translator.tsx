@@ -1,7 +1,9 @@
 "use client"
-import { useEffect, useState } from 'react';
+
+import { useState } from 'react';
 import { css } from '../../../styled-system/css';
-import Translator from '../_components/translator'
+import { translateRequestJson, responseJson } from '@/type';
+ 
 
 type SystemStyleObject = Parameters<typeof css>[0];
 
@@ -69,17 +71,52 @@ const buttonCss: SystemStyleObject = {
   }
 }
 
-export default function TranslatePage() {
-  const [translatedArray, setTranslatedArray] = useState<string[]>([])
-  useEffect(() => {
-    console.log({translatedArray})
-  },[translatedArray])
+type Translated = string
+
+export default function Translator({addEvent}: {addEvent: (translated: Translated) => void}) {
+
+  const [translateENText, setTranslateENText] = useState("");
+
+  const [translatedJAText, setTranslateJAText] = useState("");
+
+  const translateHandler = async() => {
+
+    const json: translateRequestJson = {
+      text: translateENText
+    }
+    const result = await fetch("/api/translate", {
+      method: "post",
+      body: JSON.stringify(json)
+    })
+    const resulted: responseJson = await result.json()
+    console.log({resulted})
+    if (resulted.error) {
+      console.error(resulted.error)
+    } else {
+      setTranslateJAText(resulted.trasnlated)
+      addEvent(resulted.trasnlated)
+    }
+  }
+
   return (
-    <div>
-    <Translator addEvent={(translated) => {
-      setTranslatedArray([...translatedArray, translated])
-    }}></Translator>
-    
-    </div>
+
+      <div className={css(topCss)} id="translator">
+
+        <label className={css(boxCss)} id="left">
+          en:
+          <textarea className={css(textareaCss)} value={translateENText} onChange={(e) => {
+            setTranslateENText(e.target.value)
+          }} rows={10}/>
+        </label>
+
+        <div id="button" >
+          <button onClick={translateHandler} className={css(buttonCss)}>Translate</button>
+        </div>
+
+        <label className={css(boxCss)} id="right">
+          ja:
+          <textarea className={css(textareaCss)} value={translatedJAText} rows={10} readOnly />  
+        </label>
+      </div>
   )
 }
